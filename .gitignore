@@ -35,6 +35,7 @@ htmlcov/
 # Pytest cache
 .pytest_cache/
 scripts/__pycache__
+tests/__pycache__
 
 # Custom commands build
 gemini-scripts.egg-info/
