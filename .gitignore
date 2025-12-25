@@ -39,3 +39,6 @@ tests/__pycache__
 
 # Custom commands build
 gemini-scripts.egg-info/
+
+# .github directory
+.github/
