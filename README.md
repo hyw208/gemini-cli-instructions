@@ -1,25 +1,32 @@
 # Gemini CLI Extensibility
 
-This project is a template for extending the Gemini CLI with custom commands.
+This project is a template for extending the Gemini CLI with custom commands and making them available to both Gemini CLI and GitHub Copilot agents.
 
 ## Project Structure
 
-This project is structured as a standard Python project.
+This project is structured as a standard Python project with integrations for both Gemini CLI and GitHub Copilot.
 
--   `commands/`: Contains the `.toml` configuration files for the custom commands.
--   `scripts/`: A Python package containing the implementation of the custom commands.
+### Python Core
+-   `scripts/`: A Python package containing the implementation of custom commands (shared by both Gemini CLI and Copilot).
 -   `tests/`: Contains tests for the custom commands.
 -   `pyproject.toml`: Defines the project dependencies.
 -   `build.sh`: A script to build the project, create a virtual environment, and install dependencies.
 -   `test.sh`: A script to run the tests.
 -   `clean.sh`: A script to clean up temporary files.
--   `symlink.sh`: A script to create symbolic links to the `~/.gemini` directory.
+
+### Gemini CLI Integration
+-   `commands/`: Contains the `.toml` configuration files for Gemini CLI custom commands.
+-   `gemini_symlink.sh`: A script to create symbolic links to the `~/.gemini` directory.
+
+### GitHub Copilot Integration
+-   `skills/`: Contains skill definitions (`.md` files) for GitHub Copilot agents.
+-   `copilot_symlink.sh`: A script to create symbolic links to a project's `.github/skills` directory.
 
 ## Getting Started
 
 ### Installation
 
-After cloning this project, you need to link the project files to the Gemini CLI's configuration directory (`~/.gemini`).
+After cloning this project, you need to build it and link the files to make them available.
 
 1.  **Build the project:**
 
@@ -29,12 +36,24 @@ After cloning this project, you need to link the project files to the Gemini CLI
     ./build.sh
     ```
 
-2.  **Create symbolic links:**
+2.  **Test the project:**
 
-    Run the `symlink.sh` script to automatically create the necessary symbolic links.
+    Run the `test.sh` script to verify everything works correctly.
 
     ```bash
-    ./symlink.sh
+    ./test.sh
+    ```
+
+### Integration with Gemini CLI
+
+To use the custom commands with Gemini CLI:
+
+1.  **Create symbolic links:**
+
+    Run the `gemini_symlink.sh` script to automatically create the necessary symbolic links.
+
+    ```bash
+    ./gemini_symlink.sh
     ```
 
     This script will:
@@ -43,6 +62,24 @@ After cloning this project, you need to link the project files to the Gemini CLI
     -   Create symbolic links for the `commands`, `scripts`, `.venv`, and `GEMINI.md` directories and files.
 
     Now, the Gemini CLI will be able to find and use the custom commands from this project.
+
+### Integration with GitHub Copilot
+
+To make skills available to GitHub Copilot agents in any project:
+
+1.  **Link skills to your project:**
+
+    Run the `copilot_symlink.sh` script with the path to your target project.
+
+    ```bash
+    ./copilot_symlink.sh --project-folder /path/to/your/project
+    ```
+
+    This script will:
+    -   Create a `.github` directory in the target project if it doesn't exist.
+    -   Create a symbolic link from `<project>/.github/skills` to this project's `skills/` directory.
+
+    Now, Copilot agents in that project can discover and use the skills defined in this repository.
 
 ### Development
 
@@ -60,9 +97,11 @@ To use these scripts, run them from the root of the project:
 ./clean.sh
 ```
 
-## Creating Custom Commands
+## Creating Custom Commands and Skills
 
-To create a new custom command, you need to:
+### For Gemini CLI
+
+To create a new custom command for Gemini CLI:
 
 1.  **Create a `.toml` file** in the `commands/` directory. This file defines the command's `description` and `prompt`. The `prompt` should execute your Python script.
 
@@ -76,7 +115,7 @@ To create a new custom command, you need to:
     """
     ```
 
-2.  **Create a Python script** in the `scripts/` directory. This script should contain the logic for your command and use `argparse` to handle command-line arguments.
+2.  **Create a Python script** in the `scripts/` directory. This script should contain the logic for your command and use `argparse` to handle command-line arguments. Output should be JSON format.
 
     Example: `scripts/calculator.py`
 
@@ -88,6 +127,7 @@ To create a new custom command, you need to:
 
     def calculate(expression: str) -> str:
         # ... your logic here ...
+        return json.dumps({"status": "success", "result": result})
 
     if __name__ == "__main__":
         parser = argparse.ArgumentParser()
@@ -97,5 +137,47 @@ To create a new custom command, you need to:
     ```
 
 3.  **Add tests** for your new command in the `tests/` directory.
+
+### For GitHub Copilot Agents
+
+To create a new skill for Copilot agents:
+
+1.  **Create a folder** in the `skills/` directory with your skill name (e.g., `skills/calculator/`).
+
+2.  **Create a `skill.md` file** in that folder with YAML front matter and instructions:
+
+    Example: `skills/calculator/skill.md`
+
+    ```markdown
+    ---
+    skillId: calculator
+    description: Safely evaluates a mathematical expression
+    interactions:
+      - calculate
+      - math
+      - evaluate expression
+    ---
+
+    # Instructions
+
+    Use this skill when the user asks to perform mathematical calculations.
+
+    ## Command
+
+    Run: `./.venv/bin/python -m scripts.calculator --expression "EXPRESSION"`
+
+    ## Output Format
+
+    The command returns JSON:
+    - Success: `{"status": "success", "result": VALUE}`
+    - Error: `{"status": "error", "message": "ERROR_MESSAGE"}`
+    ```
+
+3.  **Reuse the same Python script** from `scripts/` - this way both Gemini CLI and Copilot agents use the same tested implementation.
+
+## Available Commands/Skills
+
+-   **calculator**: Evaluates mathematical expressions
+-   **weather**: Gets temperature for a given city
 
 4.  **Add any new dependencies** to `pyproject.toml`.
