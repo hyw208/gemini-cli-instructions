@@ -7,6 +7,7 @@ This project is a template for extending the Gemini CLI with custom commands.
 This project is structured as a standard Python project.
 
 -   `commands/`: Contains the `.toml` configuration files for the custom commands.
+-   `skills/`: A symbolic link to `commands/`, providing an alternative name for the custom commands (skills).
 -   `scripts/`: A Python package containing the implementation of the custom commands.
 -   `tests/`: Contains tests for the custom commands.
 -   `pyproject.toml`: Defines the project dependencies.
