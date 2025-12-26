@@ -1,4 +1,4 @@
-description = "Get weather information for a city"
+description = "Custom gemini command to get weather information for a city"
 prompt = """
 Get current weather or forecast for a city:
 

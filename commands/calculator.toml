@@ -1,4 +1,4 @@
-description = "A simple calculator that evaluates mathematical expressions."
+description = "A custom gemini command that evaluates mathematical expressions."
 prompt = """
 Calculates mathematical expressions: 
 !{ ./commands/.venv/bin/python -m scripts.calculator --expression {{args}}}
