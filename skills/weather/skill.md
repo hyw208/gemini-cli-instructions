@@ -15,7 +15,7 @@ Use this skill when the user asks about weather, temperature, or climate conditi
 
 ## Command
 
-Run: `.github/skills/.venv/bin/python .github/skills/scripts/weather.py --city "CITY_NAME"`
+Run: `.github/skills/.venv/bin/python -m scripts.weather --city "CITY_NAME"`
 
 Replace `CITY_NAME` with the name of the city (e.g., "Taipei", "Tokyo", "London").
 
