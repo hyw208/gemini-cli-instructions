@@ -41,8 +41,8 @@ for entry in "$(pwd)"/skills/*; do
   ln -s "$entry" "$PROJECT_FOLDER/.github/skills/$name"
 done
 
-# Copy copilot-instructions.md to .github folder
-ln -s "$(pwd)/skills/copilot-instructions.md" "$PROJECT_FOLDER/.github/copilot-instructions.md"
+# Copy copilot-instructions.md to .github folder (this seems to be the most effective way to get GitHub Copilot to pick it up)
+ln -s "$(pwd)/skills/README.md" "$PROJECT_FOLDER/.github/copilot-instructions.md"
 
 # Also surface scripts and virtualenv under the skills folder for execution
 ln -s "$(pwd)/scripts" "$PROJECT_FOLDER/.github/skills/scripts"
