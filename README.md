@@ -79,7 +79,7 @@ To make skills available to GitHub Copilot agents in any project:
     -   Create a `.github/skills` directory in the target project (resetting any existing one).
     -   Symlink each skill folder into `<project>/.github/skills/`.
     -   Symlink `<project>/.github/skills/scripts` to this repo's `scripts/`.
-    -   Symlink `<project>/.github/skills/.venv` to this repo's `.venv` so `./.venv/bin/python -m scripts...` works.
+    -   Symlink `<project>/.github/skills/.venv` to this repo's `.venv` so `.github/skills/.venv/bin/python ...` works.
 
     Copilot agents can then discover the skills and run the referenced scripts with the shared virtual environment.
 
