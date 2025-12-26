@@ -16,7 +16,7 @@ This project is structured as a standard Python project with integrations for bo
 
 ### Gemini CLI Integration
 -   `commands/`: Contains the `.toml` configuration files for Gemini CLI custom commands.
--   `gemini_symlink.sh`: A script to create symbolic links to the `~/.gemini` directory.
+-   `gemini_symlink.sh`: A script to create symbolic links into a target Gemini commands folder you provide.
 
 ### GitHub Copilot Integration
 -   `skills/`: Contains skill definitions (`.md` files) for GitHub Copilot agents.
@@ -52,18 +52,18 @@ To use the custom commands with Gemini CLI:
 
 1.  **Create symbolic links:**
 
-    Run the `gemini_symlink.sh` script to automatically create the necessary symbolic links.
+    Run the `gemini_symlink.sh` script with an explicit target folder (no default).
 
     ```bash
-    ./gemini_symlink.sh
+    ./gemini_symlink.sh --project-folder /path/to/target   # e.g., ~/.gemini or ~/Projects
     ```
 
     This script will:
-    -   Create the `~/.gemini` directory if it doesn't exist.
-    -   Prompt you if an existing `GEMINI.md` file is found.
-    -   Create symbolic links for the `commands`, `scripts`, `.venv`, and `GEMINI.md` directories and files.
+    -   Resolve the target folder to an absolute path (and require it to be provided).
+    -   Recreate `<target>/commands` and symlink every non-hidden entry from this repo’s `commands/` (files and folders), plus `scripts/`, `.venv`, and `GEMINI.md`.
+    -   Backup an existing `<target>/GEMINI.md` to `GEMINI.md.bk` before linking.
 
-    Now, the Gemini CLI will be able to find and use the custom commands from this project.
+    Now, the Gemini CLI will be able to find and use the custom commands from this project via the linked target folder.
 
 ### Integration with GitHub Copilot
 
@@ -116,7 +116,7 @@ To create a new custom command for Gemini CLI:
     description = "Simple Calculator"
     prompt = """
     Calculates mathematical expressions:
-    !{ ~/.gemini/.venv/bin/python -m scripts.calculator --expression "{{args}}"}
+    !{ PYTHONPATH=./commands ./commands/.venv/bin/python -m scripts.calculator --expression "{{args}}"}
     """
     ```
 

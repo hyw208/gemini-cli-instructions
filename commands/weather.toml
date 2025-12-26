@@ -10,5 +10,5 @@ Examples:
 - Current weather in Beijing: --city "Beijing"
 - 7-day forecast for London: --city "London" --forecast 7
 
-!{ ~/.gemini/commands/.venv/bin/python -m scripts.weather {{args}}}
+!{ PYTHONPATH=./commands ./commands/.venv/bin/python -m scripts.weather {{args}}}
 """

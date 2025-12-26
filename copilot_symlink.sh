@@ -38,7 +38,7 @@ mkdir -p "$PROJECT_FOLDER/.github/skills"
 # Link each skill folder so they can be edited independently if needed
 for entry in "$(pwd)"/skills/*; do
   name=$(basename "$entry")
-  ln -s "$entry" "$PROJECT_FOLDER/.github/skills/$name"
+  ln -sf "$entry" "$PROJECT_FOLDER/.github/skills/$name"
 done
 
 # Copy copilot-instructions.md to .github folder (this seems to be the most effective way to get GitHub Copilot to pick it up)
