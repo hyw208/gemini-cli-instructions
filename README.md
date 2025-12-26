@@ -113,7 +113,7 @@ To create a new custom command for Gemini CLI:
     description = "Simple Calculator"
     prompt = """
     Calculates mathematical expressions:
-    !{ ./.venv/bin/python -m scripts.calculator --expression "{{expression}}"}
+    !{ ~/.gemini/.venv/bin/python -m scripts.calculator --expression "{{args}}"}
     """
     ```
 
