@@ -17,12 +17,12 @@ Use this skill when the user asks about weather, temperature, or climate conditi
 
 **Get current weather:**
 ```bash
-.github/skills/.venv/bin/python .github/skills/scripts/weather.py --city "CITY_NAME"
+.github/skills/.venv/bin/python -m scripts.weather --city "CITY_NAME"
 ```
 
 **Get forecast:**
 ```bash
-.github/skills/.venv/bin/python .github/skills/scripts/weather.py --city "CITY_NAME" --forecast [DAYS]
+.github/skills/.venv/bin/python -m scripts.weather --city "CITY_NAME" --forecast [DAYS]
 ```
 
 Replace `CITY_NAME` with the city name (e.g., "Taipei", "Tokyo", "London").

@@ -116,7 +116,7 @@ To create a new custom command for Gemini CLI:
     description = "Simple Calculator"
     prompt = """
     Calculates mathematical expressions:
-    !{ PYTHONPATH=./commands ./commands/.venv/bin/python -m scripts.calculator --expression "{{args}}"}
+    !{ ./commands/.venv/bin/python -m scripts.calculator --expression "{{args}}"}
     """
     ```
 
@@ -169,7 +169,7 @@ To create a new skill for Copilot agents:
 
     ## Command
 
-    Run: `.github/skills/.venv/bin/python .github/skills/scripts/calculator.py --expression "EXPRESSION"`
+    Run: `.github/skills/.venv/bin/python -m scripts.calculator --expression "EXPRESSION"`
 
     ## Output Format
 
