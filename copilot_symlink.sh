@@ -30,16 +30,28 @@ PROJECT_FOLDER=$(cd "$PROJECT_FOLDER" && pwd)
 
 echo "Creating .github folder and symbolic links in: $PROJECT_FOLDER"
 
-# Create .github directory if it doesn't exist
+# Create .github/skills directory (fresh)
 mkdir -p "$PROJECT_FOLDER/.github"
-
-# Remove existing skills symlink/folder if it exists
 rm -rf "$PROJECT_FOLDER/.github/skills"
+mkdir -p "$PROJECT_FOLDER/.github/skills"
 
-# Create symbolic link to skills
-ln -s "$(pwd)/skills" "$PROJECT_FOLDER/.github/skills"
+# Link each skill folder so they can be edited independently if needed
+for entry in "$(pwd)"/skills/*; do
+  name=$(basename "$entry")
+  ln -s "$entry" "$PROJECT_FOLDER/.github/skills/$name"
+done
 
-echo "Symbolic link created successfully at: $PROJECT_FOLDER/.github/skills"
+# Copy REAME.md to skills folder
+cp "$(pwd)/README.md" "$PROJECT_FOLDER/.github/skills/README.md"
+
+# Copy copilot-instructions.md to .github folder
+cp "$(pwd)/copilot-instructions.md" "$PROJECT_FOLDER/.github/copilot-instructions
+
+# Also surface scripts and virtualenv under the skills folder for execution
+ln -s "$(pwd)/scripts" "$PROJECT_FOLDER/.github/skills/scripts"
+ln -s "$(pwd)/.venv" "$PROJECT_FOLDER/.github/skills/.venv"
+
+echo "Symbolic links created successfully under: $PROJECT_FOLDER/.github/skills"
 
 
 

@@ -15,7 +15,7 @@ Use this skill when the user asks to perform mathematical calculations or evalua
 
 ## Command
 
-Run: `./.venv/bin/python -m scripts.calculator --expression "EXPRESSION"`
+Run: `.github/skills/.venv/bin/python .github/skills/scripts/calculator.py --expression "EXPRESSION"`
 
 Replace `EXPRESSION` with the mathematical expression to evaluate (e.g., "2+3*4").
 

@@ -20,4 +20,10 @@ if [ -d "gemini-scripts.egg-info" ]; then
     rm -rf gemini-scripts.egg-info
 fi
 
+# Remove local virtual environment
+if [ -d ".venv" ]; then
+    echo "Removing .venv..."
+    rm -rf .venv
+fi
+
 echo "Cleanup complete."

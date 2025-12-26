@@ -67,7 +67,7 @@ To use the custom commands with Gemini CLI:
 
 To make skills available to GitHub Copilot agents in any project:
 
-1.  **Link skills to your project:**
+1.  **Link skills (plus scripts and venv) to your project:**
 
     Run the `copilot_symlink.sh` script with the path to your target project.
 
@@ -76,10 +76,12 @@ To make skills available to GitHub Copilot agents in any project:
     ```
 
     This script will:
-    -   Create a `.github` directory in the target project if it doesn't exist.
-    -   Create a symbolic link from `<project>/.github/skills` to this project's `skills/` directory.
+    -   Create a `.github/skills` directory in the target project (resetting any existing one).
+    -   Symlink each skill folder into `<project>/.github/skills/`.
+    -   Symlink `<project>/.github/skills/scripts` to this repo's `scripts/`.
+    -   Symlink `<project>/.github/skills/.venv` to this repo's `.venv` so `./.venv/bin/python -m scripts...` works.
 
-    Now, Copilot agents in that project can discover and use the skills defined in this repository.
+    Copilot agents can then discover the skills and run the referenced scripts with the shared virtual environment.
 
 ### Development
 
