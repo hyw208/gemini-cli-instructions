@@ -1,5 +1,5 @@
 description = "Get temperature"
 prompt = """
 Get temperature for a city: 
-!{ ~/.gemini/commands/.venv/bin/python -m scripts.weather --city "{{city name}}"}
+!{ ~/.gemini/commands/.venv/bin/python -m scripts.weather --city {{city name}}}
 """
