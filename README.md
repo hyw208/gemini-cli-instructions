@@ -166,7 +166,7 @@ To create a new skill for Copilot agents:
 
     ## Command
 
-    Run: `./.venv/bin/python -m scripts.calculator --expression "EXPRESSION"`
+    Run: `.github/skills/.venv/bin/python .github/skills/scripts/calculator.py --expression "EXPRESSION"`
 
     ## Output Format
 

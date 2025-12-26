@@ -41,11 +41,8 @@ for entry in "$(pwd)"/skills/*; do
   ln -s "$entry" "$PROJECT_FOLDER/.github/skills/$name"
 done
 
-# Copy REAME.md to skills folder
-cp "$(pwd)/README.md" "$PROJECT_FOLDER/.github/skills/README.md"
-
 # Copy copilot-instructions.md to .github folder
-cp "$(pwd)/copilot-instructions.md" "$PROJECT_FOLDER/.github/copilot-instructions
+ln -s "$(pwd)/skills/copilot-instructions.md" "$PROJECT_FOLDER/.github/copilot-instructions.md"
 
 # Also surface scripts and virtualenv under the skills folder for execution
 ln -s "$(pwd)/scripts" "$PROJECT_FOLDER/.github/skills/scripts"
