@@ -96,6 +96,13 @@ def get_current_weather(city: str) -> dict:
     except Exception as e:
         return {"status": "error", "message": str(e)}
 
+def weather(city: str) -> str:
+    """
+    Wrapper function for backward compatibility. Returns current weather as JSON string.
+    """
+    result = get_current_weather(city)
+    return json.dumps(result)
+
 def get_forecast(city: str, days: int = 3) -> dict:
     """
     Fetches weather forecast from Open-Meteo.
