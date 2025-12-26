@@ -46,6 +46,8 @@ After cloning this project, you need to build it and link the files to make them
 
 ### Integration with Gemini CLI
 
+Upon Gemini loading, it checks for instructions in a few key locations. The primary one is ~/.gemini/GEMINI.md, GEMINI.md files within the current project's commands/ directory and in any installed extension directories (like ~/.gemini/extensions/conductor/GEMINI.md). The trick is ask Gemini to look at all the custom commands, summarize and write to skills/README.md!
+
 To use the custom commands with Gemini CLI:
 
 1.  **Create symbolic links:**
@@ -65,7 +67,8 @@ To use the custom commands with Gemini CLI:
 
 ### Integration with GitHub Copilot
 
-Based on experiments, copilot first looks at current project folder and tries to find 1) scripts, 2) skills and then 3) fallbacks to .github/copilot-instructions.md. To make skills available to GitHub Copilot agents in any project:
+Based on experiments, copilot first looks at current project folder and tries to find 1) scripts, 2) skills and then 3) fallbacks to .github/copilot-instructions.md. The trick is ask Copilot to look at all the custom skills, summarize and write to commands/GEMINI.md!
+To make skills available to GitHub Copilot agents in any project:
 
 1.  **Link skills (plus scripts and venv) to your project:**
 
