@@ -65,14 +65,14 @@ To use the custom commands with Gemini CLI:
 
 ### Integration with GitHub Copilot
 
-To make skills available to GitHub Copilot agents in any project:
+Based on experiments, copilot first looks at current project folder and tries to find 1) scripts, 2) skills and then 3) fallbacks to .github/copilot-instructions.md. To make skills available to GitHub Copilot agents in any project:
 
 1.  **Link skills (plus scripts and venv) to your project:**
 
     Run the `copilot_symlink.sh` script with the path to your target project.
 
     ```bash
-    ./copilot_symlink.sh --project-folder /path/to/your/project
+    ./copilot_symlink.sh --project-folder /path/to/your/project, eg $(pwd)
     ```
 
     This script will:
