@@ -14,11 +14,16 @@ fi
 ln -s "$(pwd)/commands/GEMINI.md" ~/.gemini/GEMINI.md
 echo "Created symlink for GEMINI.md"
 
-# Remove other conflicting files or symlinks
+# Remove and recreate commands directory
 rm -rf ~/.gemini/commands
+mkdir -p ~/.gemini/commands
 
-# Create the rest of the symbolic links
-ln -s "$(pwd)/commands" ~/.gemini/commands
+# Symlink individual command files
+for file in "$(pwd)"/commands/*.toml; do
+  ln -s "$file" ~/.gemini/commands/$(basename "$file")
+done
+
+# Symlink scripts and .venv inside commands folder
 ln -s "$(pwd)/scripts" ~/.gemini/commands/scripts
 ln -s "$(pwd)/.venv" ~/.gemini/commands/.venv
 
