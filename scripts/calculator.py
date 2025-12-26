@@ -8,6 +8,7 @@ def calculate(expression: str) -> str:
     Evaluates a mathematical expression and returns a JSON string.
     """
     try:
+        print("expression: " + expression)
         allowed_names = {"__builtins__": {}}
         result = eval(expression, allowed_names, {})
         # Return a structured success response

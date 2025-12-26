@@ -9,6 +9,7 @@ def weather(city: str) -> str:
     Fetches weather data from wttr.in and returns a JSON string.
     """
     try:
+        print("city: " + city)
         response = requests.get(f"https://wttr.in/{city}?format=j1")
         response.raise_for_status()  # Raise an exception for bad status codes
         data = response.json()

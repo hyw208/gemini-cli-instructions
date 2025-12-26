@@ -1,5 +1,5 @@
 description = "Simple Calculator"
 prompt = """
 Calculates mathematical expressions: 
-!{ ~/.gemini/commands/.venv/bin/python -m scripts.calculator --expression {{expression}}}
+!{ ~/.gemini/commands/.venv/bin/python -m scripts.calculator --expression {{args}}}
 """
