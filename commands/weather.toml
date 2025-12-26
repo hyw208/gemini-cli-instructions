@@ -1,5 +1,14 @@
-description = "Get temperature"
+description = "Get weather information for a city"
 prompt = """
-Get temperature for a city: 
-!{ ~/.gemini/commands/.venv/bin/python -m scripts.weather --city {{args}}}
+Get current weather or forecast for a city:
+
+Available options:
+- Current weather: --city "CITY"
+- Forecast: --city "CITY" --forecast [DAYS]
+
+Examples:
+- Current weather in Beijing: --city "Beijing"
+- 7-day forecast for London: --city "London" --forecast 7
+
+!{ ~/.gemini/commands/.venv/bin/python -m scripts.weather {{args}}}
 """
